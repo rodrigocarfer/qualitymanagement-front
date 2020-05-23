@@ -10,12 +10,26 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+- task: geeklearningio.gl-vsts-tasks-yarn.yarn-installer-task.YarnInstaller@3
+  displayName: 'Use Yarn 1.x'
+
+- task: geeklearningio.gl-vsts-tasks-yarn.yarn-task.Yarn@2
+  displayName: 'Yarn install'
+  inputs:
+    Arguments: install
+
+- task: geeklearningio.gl-vsts-tasks-yarn.yarn-task.Yarn@2
+  displayName: 'Yarn build'
+  inputs:
+    Arguments: build
+
+- task: ArchiveFiles@2
+  displayName: 'Archive build'
+  inputs:
+    rootFolderOrFile: build
+    includeRootFolder: false
+    archiveFile: '$(Build.ArtifactStagingDirectory)/drop.zip'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
