@@ -13,7 +13,7 @@ const Home = () => {
         </div>
       </div>
       <div className="flagBottom" />
-    </div>
+    </div> 
   );
 };
 
