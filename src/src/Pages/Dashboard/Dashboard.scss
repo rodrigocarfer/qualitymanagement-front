@@ -1,0 +1,130 @@
+.dashboard {
+    border:1px solid #000;
+    font-family:arial;
+    height: 750px;
+    margin: 0px 0px 30px 30px;
+    width: 90%;
+    border-style: solid;
+    border-color: white;
+    border-radius: 25px;
+    border-width: 5px;
+  }
+
+.titulo-grafico {
+    margin: 30px;
+}
+
+.legendas {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 11px;
+}
+
+.legenda-grafico {
+    margin-left: 70px;
+    margin-bottom: 30px;
+}
+
+.dashboards {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    width: 90%;
+}
+
+.item-dashboard {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+}
+
+.titulo-dashboard {
+    margin: 30px 0px 30px 30px;
+    font-size: 20px;
+    text-align: center;
+    width:90%;
+}
+
+.dashboard ul{
+    list-style:none;
+    max-height:100%;
+    margin:0;
+    overflow:auto;
+    padding:0;
+    text-indent:10px;
+  }
+
+.dashboard  li{
+    line-height:25px;
+  }
+
+.dashboard li:nth-child(even){
+    background:#d9dbff;
+  }
+
+header
+{
+	font-family: 'Lobster', cursive;
+	text-align: center;
+	font-size: 25px;	
+}
+
+#info
+{
+	font-size: 18px;
+	color: #555;
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+a{
+	color: #074E8C;
+}
+
+.scrollbar
+{
+	margin-left: 30px;
+	float: left;
+	height: 300px;
+	width: 65px;
+	background: #F5F5F5;
+	overflow-y: scroll;
+	margin-bottom: 25px;
+}
+
+.force-overflow
+{
+	min-height: 450px;
+}
+
+#wrapper
+{
+	text-align: center;
+	width: 500px;
+	margin: auto;
+}
+
+
+::-webkit-scrollbar-track
+{
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      background-color: #F5F5F5;
+      border-radius: 10px;
+}
+  
+::-webkit-scrollbar
+  {
+      width: 10px;
+      background-color: #F5F5F5;
+  }
+  
+::-webkit-scrollbar-thumb
+  {
+      border-radius: 10px;
+      background-image: -webkit-gradient(linear,
+                                         left bottom,
+                                         left top,
+                                         color-stop(0.44, rgb(122,153,217)),
+                                         color-stop(0.72, rgb(73,125,189)),
+                                         color-stop(0.86, rgb(28,58,148)));
+  }

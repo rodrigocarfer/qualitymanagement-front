@@ -8,7 +8,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import configureStore from './Config/Store';
-import NetworkConfig from './Config/NetworkConfig';
 import { AppProvider } from '@shopify/polaris';
 import { authContext } from './Config/adalConfig';
 
@@ -16,7 +15,7 @@ import '@shopify/polaris/styles.css';
 
 const { persistor, store } = configureStore();
  
-const DO_NOT_LOGIN = false;
+const DO_NOT_LOGIN = true;
 
 const render = (target) => {
   ReactDOM.render(

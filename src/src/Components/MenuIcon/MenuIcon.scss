@@ -1,0 +1,36 @@
+.menuicon {
+    text-align: center;
+    margin: 0px auto 30px auto;    
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    transition: transform .2s;
+    border-style: solid;
+    border-color: white;
+    border-radius: 25px;
+    background-color: #d9dbff
+}
+
+.menuicon:hover {
+    transform: scale(1.05);
+}
+
+.menuicon-titulo {
+    margin-top: 15px;
+}
+
+.image-form {
+    width: 130px;
+    height: 130px;
+}
+
+.image-operation {
+    margin-top: 20px;
+    width: 130px;
+    height: 130px;
+}
+
+.image-dashboard {
+    width: 170px;
+    height: 170px;
+}
