@@ -15,7 +15,7 @@ import '@shopify/polaris/styles.css';
 
 const { persistor, store } = configureStore();
  
-const DO_NOT_LOGIN = true;
+const DO_NOT_LOGIN = false;
 
 const render = (target) => {
   ReactDOM.render(
