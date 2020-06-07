@@ -43,6 +43,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
+    SourceFolder: '$(uiSource)'
     Contents: 'web.config'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
