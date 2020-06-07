@@ -33,6 +33,12 @@ steps:
     popd
   displayName: 'npm install and build'
 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(uiSource)'
+    Contents: 'web.config'
+    TargetFolder: '$(uiBuild)'
+
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(uiBuild)'
@@ -40,12 +46,6 @@ steps:
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
-
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(uiSource)'
-    Contents: 'web.config'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   inputs:
