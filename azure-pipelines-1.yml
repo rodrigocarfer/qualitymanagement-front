@@ -33,12 +33,6 @@ steps:
     popd
   displayName: 'npm install and build'
 
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(uiSource)'
-    Contents: 'web.config'
-    TargetFolder: '$(uiBuild)'
-
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(uiBuild)'
