@@ -125,7 +125,7 @@ class FormularioRegistro extends Component {
     formData.tipoOcorrencia = parseInt(formData.tipoOcorrencia);
 
     axios.post(
-      'http://gestaoqualidade-api.azurewebsites.net/api/v1/nao-conformidades',
+      'https://gestaoqualidade-api.azurewebsites.net/api/v1/nao-conformidades',
       formData);
   }
 

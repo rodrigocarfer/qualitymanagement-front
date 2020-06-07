@@ -21,12 +21,10 @@ export const withAdalLoginApi = withAdalLogin(authContext, adalConfig.endpoints.
 export const getToken = () => authContext.getCachedToken(adalConfig.clientId);
 
 export const getAccessToken = () => {
-  var a = authContext.getCachedToken(adalConfig.clientId);
-  adalApiFetch()
-  axios.get('http://gestaoqualidade-api.azurewebsites.net/Authentication/access_token',
+  axios.get('https://gestaoqualidade-api.azurewebsites.net/Authentication/access_token',
         {
           headers: {
-            'x-jwt': a,
+            'x-jwt': authContext.getCachedToken(adalConfig.clientId),
           },
         }).then(
         (result) => localStorage.setItem("access_token", result.data),
