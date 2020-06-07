@@ -1,6 +1,19 @@
 import axios from 'axios';
 import { authContext } from './adalConfig';
 
+const selecionarChaveAcesso = () => localStorage.access_token;
+
+const listener = () => {
+  const chave_acesso = selecionarChaveAcesso();
+  if (chave_acesso) {
+    axios.defaults.headers.common.access_token = chave_acesso;
+  }
+};
+
+const configureListener = (store) => {
+  store.subscribe(() => listener());
+};
+
 export default {
   setupInterceptors: (store) => {
     axios.interceptors.response.use(
@@ -23,4 +36,5 @@ export default {
       },
     );
   },
+  configureListener: (store) => configureListener(store)
 };

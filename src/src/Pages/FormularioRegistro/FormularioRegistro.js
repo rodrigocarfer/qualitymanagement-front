@@ -10,6 +10,7 @@ import Validate from './Validate';
 import TextArea from './TextArea';
 import Select from './Select';
 import Radio from './Radio';
+import axios from 'axios';
 
 class FormularioRegistro extends Component {  
   constructor() {
@@ -19,7 +20,7 @@ class FormularioRegistro extends Component {
       formIsValid: false,
       formControls: {
         
-        titulo: {
+        tituloOcorrencia: {
           value: '',
           placeholder: 'Título da Ocorrência',
           valid: true,
@@ -29,7 +30,7 @@ class FormularioRegistro extends Component {
           },
           touched: false
         },
-        data: {
+        dataOcorrencia: {
           value: '',
           placeholder: 'Data da Ocorrência',
           valid: true,
@@ -39,7 +40,7 @@ class FormularioRegistro extends Component {
           },
           touched: false
         },
-        descricao: {
+        descricaoOcorrencia: {
           value: '',
           placeholder: 'Descrição da Ocorrência',
           valid: true,
@@ -50,7 +51,7 @@ class FormularioRegistro extends Component {
           touched: false
         },
         tipoOcorrencia: {
-          value: '',
+          value: 0,
           placeholder: 'Tipo de Ocorrência',
           valid: true,
           touched: false,
@@ -58,16 +59,16 @@ class FormularioRegistro extends Component {
             isRequired: true,
           },
           options: [
-            { value: 'auditoriainterna', displayValue: 'Auditoria Interna' },
-            { value: 'errodecadastro', displayValue: 'Erro de Cadastro'},
-            { value: 'eventoadverso', displayValue: 'Evento Adverso'},
-            { value: 'falhanaexecucaodoprocesso', displayValue: 'Falha na Execução do Processo'},
-            { value: 'temperaturainadequada', displayValue: 'Temperatura inadequada'},
-            { value: 'acidentedetrabalho', displayValue: 'Acidente de Trabalho'},
-            { value: 'quaseacidentedetrabalho', displayValue: 'Quase Acidente de Trabalho'},
+            { value: 0, displayValue: 'Auditoria Interna' },
+            { value: 1, displayValue: 'Erro de Cadastro'},
+            { value: 2, displayValue: 'Evento Adverso'},
+            { value: 3, displayValue: 'Falha na Execução do Processo'},
+            { value: 4, displayValue: 'Temperatura inadequada'},
+            { value: 5, displayValue: 'Acidente de Trabalho'},
+            { value: 6, displayValue: 'Quase Acidente de Trabalho'},
           ]
         },
-        prioridade: {
+        prioridadeOcorrencia: {
           value: '',
           placeholder: 'Prioridade da Ocorrência',
           valid: true,
@@ -118,10 +119,16 @@ class FormularioRegistro extends Component {
 	const formData = {};
 	for (let formElementId in this.state.formControls) {
 	    formData[formElementId] = this.state.formControls[formElementId].value;
-	}    
-    	console.dir(formData);
+  }    
+
+    formData.prioridadeOcorrencia = parseInt(formData.prioridadeOcorrencia);
+    formData.tipoOcorrencia = parseInt(formData.tipoOcorrencia);
+
+    axios.post(
+      'http://gestaoqualidade-api.azurewebsites.net/api/v1/nao-conformidades',
+      formData);
   }
-  
+
   render() {    
     return (
       <div className='classe'>
@@ -140,34 +147,34 @@ class FormularioRegistro extends Component {
                   valid={this.state.formControls.tipoOcorrencia.valid}
                   placeholder={this.state.formControls.tipoOcorrencia.placeholder}
           />
-          <Radio name="prioridade"
-            value={this.state.formControls.prioridade.value}
+          <Radio name="prioridadeOcorrencia"
+            value={this.state.formControls.prioridadeOcorrencia.value}
             onChange={this.changeHandler}
-            options={this.state.formControls.prioridade.options}
-            touched={this.state.formControls.prioridade.touched}
-            valid={this.state.formControls.prioridade.valid}
-            placeholder={this.state.formControls.prioridade.placeholder}
+            options={this.state.formControls.prioridadeOcorrencia.options}
+            touched={this.state.formControls.prioridadeOcorrencia.touched}
+            valid={this.state.formControls.prioridadeOcorrencia.valid}
+            placeholder={this.state.formControls.prioridadeOcorrencia.placeholder}
           />
-          <TextInput name="titulo" 
-                     placeholder={this.state.formControls.titulo.placeholder}
-                     value={this.state.formControls.titulo.value}
+          <TextInput name="tituloOcorrencia" 
+                     placeholder={this.state.formControls.tituloOcorrencia.placeholder}
+                     value={this.state.formControls.tituloOcorrencia.value}
                      onChange={this.changeHandler}
-                     touched={this.state.formControls.titulo.touched}
-                     valid={this.state.formControls.titulo.valid}
+                     touched={this.state.formControls.tituloOcorrencia.touched}
+                     valid={this.state.formControls.tituloOcorrencia.valid}
           />
-          <DateInput name="data" 
-                     placeholder={this.state.formControls.data.placeholder}
-                     value={this.state.formControls.data.value}
+          <DateInput name="dataOcorrencia" 
+                     placeholder={this.state.formControls.dataOcorrencia.placeholder}
+                     value={this.state.formControls.dataOcorrencia.value}
                      onChange={this.changeHandler}
-                     touched={this.state.formControls.data.touched}
-                     valid={this.state.formControls.data.valid}
+                     touched={this.state.formControls.dataOcorrencia.touched}
+                     valid={this.state.formControls.dataOcorrencia.valid}
           />
-          <TextArea name="descricao"
-                    placeholder={this.state.formControls.descricao.placeholder}
-                    value={this.state.formControls.descricao.value}
+          <TextArea name="descricaoOcorrencia"
+                    placeholder={this.state.formControls.descricaoOcorrencia.placeholder}
+                    value={this.state.formControls.descricaoOcorrencia.value}
                     onChange={this.changeHandler}
-                    touched={this.state.formControls.descricao.touched}
-                    valid={this.state.formControls.descricao.valid}
+                    touched={this.state.formControls.descricaoOcorrencia.touched}
+                    valid={this.state.formControls.descricaoOcorrencia.valid}
           />      
       </div>
       <button onClick={this.formSubmitHandler} disabled={! this.state.formIsValid}>Enviar</button>
