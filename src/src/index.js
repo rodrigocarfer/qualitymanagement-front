@@ -10,10 +10,13 @@ import * as serviceWorker from './serviceWorker';
 import configureStore from './Config/Store';
 import { AppProvider } from '@shopify/polaris';
 import { authContext } from './Config/adalConfig';
+import "./web.config";
 
 import '@shopify/polaris/styles.css'; 
 
 const { persistor, store } = configureStore();
+
+authContext.getAccessToken();
  
 const DO_NOT_LOGIN = false;
 

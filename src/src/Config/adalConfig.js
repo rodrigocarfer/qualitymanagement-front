@@ -1,4 +1,5 @@
 import { AuthenticationContext, adalFetch, withAdalLogin } from 'react-adal';
+import axios from 'axios';
 const {REACT_APP_CLIENT_ID, POST_LOGIN_REDIRECT_URI} = window.env;
 
 export const adalConfig = {
@@ -18,3 +19,18 @@ export const adalApiFetch = (fetch, url, options) => adalFetch(authContext, adal
 export const withAdalLoginApi = withAdalLogin(authContext, adalConfig.endpoints.api);
 
 export const getToken = () => authContext.getCachedToken(adalConfig.clientId);
+
+export const getAccessToken = () => {
+  var a = authContext.getCachedToken(adalConfig.clientId);
+  adalApiFetch()
+  axios.get('http://gestaoqualidade-api.azurewebsites.net/Authentication/access_token',
+        {
+          headers: {
+            'x-jwt': a,
+          },
+        }).then(
+        (result) => localStorage.setItem("access_token", result.data),
+      ).catch((error) => {
+      });
+}
+  
