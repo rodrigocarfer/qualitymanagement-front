@@ -40,11 +40,11 @@ const data03 = [
   ];
 
 class Chart extends PureComponent {
-
+  
   render() {
     return (
-        <>
-      <div className='titulo-grafico'>
+      <div class="loader"></div>
+      /*<div className='titulo-grafico'>
         <p><b> Quantidade de Ocorrências por tipo em Aberto </b></p>
       </div>
       <PieChart width={500} height={200}>
@@ -79,7 +79,7 @@ class Chart extends PureComponent {
       <Bar dataKey="pv" stackId="a" fill="#8884d8" />
       <Bar dataKey="uv" stackId="a" fill="#82ca9d" />
     </BarChart>
-    </>
+    </>*/
     );
   }
 }

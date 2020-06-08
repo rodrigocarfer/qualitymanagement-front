@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TopMenu from '../../Components/TopMenu/TopMenu';
 import Footer from '../../Components/Footer/Footer';
@@ -29,6 +29,7 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = () =>{
   const classes = useStyles();
+  const [dados, setdados] = useState(false);
 
   return (
     <div>
@@ -43,8 +44,8 @@ const Dashboard = () =>{
         <div className='titulo-dashboard'>
         <h1 className=''><b> Registros de Ocorrências Recentes </b></h1>
         </div>
-        <div className='dashboard'>          
-          <ul>
+        <div className='dashboard'>                
+        {dados ? (<ul>
             <li><Item /></li>
             <li><Item /></li>
             <li><Item /></li>
@@ -55,7 +56,7 @@ const Dashboard = () =>{
             <li><Item /></li>
             <li><Item /></li>
             <li><Item /></li>
-          </ul>
+          </ul>) : <div className='loader'></div> }  
         </div>
         </div>
         <div className='item-dashboard'>

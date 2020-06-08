@@ -11,7 +11,6 @@ import configureStore from './Config/Store';
 import { AppProvider } from '@shopify/polaris';
 import { authContext, getAccessToken } from './Config/adalConfig';
 import NetworkConfig from './Config/NetworkConfig';
-import './web.config'
 
 import '@shopify/polaris/styles.css'; 
 
