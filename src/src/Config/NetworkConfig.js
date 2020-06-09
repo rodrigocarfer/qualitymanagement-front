@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { authContext } from './adalConfig';
+import { authContext, getAccessToken } from './adalConfig';
 
 const selecionarChaveAcesso = () => localStorage.access_token;
 
@@ -8,6 +8,8 @@ const listener = () => {
   if (chave_acesso) {
     axios.defaults.headers.common.access_token = chave_acesso;
   }
+  else 
+    return false;
 };
 
 const configureListener = (store) => {

@@ -21,14 +21,19 @@ export const withAdalLoginApi = withAdalLogin(authContext, adalConfig.endpoints.
 export const getToken = () => authContext.getCachedToken(adalConfig.clientId);
 
 export const getAccessToken = () => {
-  axios.get('https://gestaoqualidade-api.azurewebsites.net/Authentication/access_token',
-        {
-          headers: {
-            'x-jwt': authContext.getCachedToken(adalConfig.clientId),
+  if(!localStorage.access_token)
+    axios.get('https://gestaoqualidade-api.azurewebsites.net/Authentication/access_token',
+          {
+            headers: {
+              'x-jwt': authContext.getCachedToken(adalConfig.clientId),
+            },
+          }).then(
+          (result) => {
+            localStorage.setItem("access_token", result.data)
+            if(window.location.pathname !== "/")
+              window.location.reload(true);
           },
-        }).then(
-        (result) => localStorage.setItem("access_token", result.data),
-      ).catch((error) => {
-      });
+        ).catch((error) => {
+        });
 }
   

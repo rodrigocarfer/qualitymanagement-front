@@ -79,7 +79,7 @@ class FormularioRegistro extends Component {
           options: [
             { value: 0, displayValue: 'Baixa' },
             { value: 1, displayValue: 'Média' },
-            { value: 1, displayValue: 'Alta' },
+            { value: 2, displayValue: 'Alta' },
           ]
         }        
       }
@@ -115,7 +115,9 @@ class FormularioRegistro extends Component {
 
   }  
   
-  formSubmitHandler = () => {
+  formSubmitHandler = () => {  
+    document.getElementsByClassName("btnEnviar")[0].disabled = true;
+
 	const formData = {};
 	for (let formElementId in this.state.formControls) {
 	    formData[formElementId] = this.state.formControls[formElementId].value;
@@ -126,10 +128,16 @@ class FormularioRegistro extends Component {
 
     axios.post(
       'https://gestaoqualidade-api.azurewebsites.net/api/v1/nao-conformidades',
-      formData);
+      formData).then(() => {
+        document.getElementsByClassName("form")[0].style.display = 'none';
+        document.getElementsByClassName("btnEnviar")[0].style.display = 'none';
+        document.getElementsByClassName("salvo")[0].style.display = 'block';
+      });
   }
 
-  render() {    
+
+
+  render(salvo) {    
     return (
       <div className='classe'>
       <TopMenu />
@@ -138,6 +146,7 @@ class FormularioRegistro extends Component {
       <div className='classes-title'>
         <Typography className='titulo' variant='h3'>Registro de Não Conformidade</Typography>
       </div>
+      <div className="salvo"> <b> Registro Salvo Com sucesso! </b> </div>
       <div className="form">
           <Select name="tipoOcorrencia"
                   value={this.state.formControls.tipoOcorrencia.value}
@@ -176,8 +185,8 @@ class FormularioRegistro extends Component {
                     touched={this.state.formControls.descricaoOcorrencia.touched}
                     valid={this.state.formControls.descricaoOcorrencia.valid}
           />      
-      </div>
-      <button onClick={this.formSubmitHandler} disabled={! this.state.formIsValid}>Enviar</button>
+      </div> 
+      <button className="btnEnviar" onClick={this.formSubmitHandler} disabled={! this.state.formIsValid}>Enviar</button>
     </main>
       <Footer />
     </div>

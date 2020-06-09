@@ -3,18 +3,6 @@ import {
   PieChart, Pie, Legend, Tooltip, BarChart, CartesianGrid, XAxis, YAxis, Bar
 } from 'recharts';
 
-const data01 = [
-  { name: 'Group A', value: 400 }, { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 }, { name: 'Group D', value: 200 },
-  { name: 'Group E', value: 278 }, { name: 'Group F', value: 189 },
-];
-
-const data02 = [
-  { name: 'Group A', value: 2400 }, { name: 'Group B', value: 4567 },
-  { name: 'Group C', value: 1398 }, { name: 'Group D', value: 9800 },
-  { name: 'Group E', value: 3908 }, { name: 'Group F', value: 4800 },
-];
-
 const data03 = [
     {
       name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
@@ -39,17 +27,34 @@ const data03 = [
     },
   ];
 
-class Chart extends PureComponent {
-  
-  render() {
+const Chart = ({dados, ObterPrioridade, ObterTipo,}) => {
+
+    if(dados){
+      dados.quantidadeNaoConformidadePorTipo.every((v) => 
+      v.name = ObterTipo(v.tipoOcorrencia));
+
+      dados.quantidadeNaoConformidadePorPrioridade.every((v) => 
+      v.name = ObterPrioridade(v.prioridadeOcorrencia));
+
+      dados.quantidadeNaoConformidadePorDataEPrioridade.every((v) => {
+        v.name = v.anoMes.substring(0,7);
+        v.Baixa = v.quantidadeBaixa;
+        v.Media = v.quantidadeMedia;
+        v.Alta = v.quantidadeAlta;
+
+        return v;
+      });
+    }     
+
     return (
-      <div class="loader"></div>
-      /*<div className='titulo-grafico'>
+      dados ? 
+      (<>
+      <div className='titulo-grafico'>
         <p><b> Quantidade de Ocorrências por tipo em Aberto </b></p>
       </div>
       <PieChart width={500} height={200}>
-        <Pie dataKey="value" isAnimationActive={true} data={data01} cx={150} cy={100} outerRadius={50} fill="#8884d8" label />
-        <Pie dataKey="value" isAnimationActive={true} data={data02} cx={380} cy={100} outerRadius={50} fill="#82ca9d" label/>
+        <Pie dataKey="quantidade" isAnimationActive={true} data={dados.quantidadeNaoConformidadePorPrioridade} cx={150} cy={100} outerRadius={50} fill="#8884d8" label />
+        <Pie dataKey="quantidade" isAnimationActive={true} data={dados.quantidadeNaoConformidadePorTipo} cx={380} cy={100} outerRadius={50} fill="#82ca9d" label/>
         <Tooltip />
       </PieChart>
       <div className='legendas'>
@@ -66,7 +71,7 @@ class Chart extends PureComponent {
       <BarChart
       width={500}
       height={300}
-      data={data03}
+      data={dados.quantidadeNaoConformidadePorDataEPrioridade}
       margin={{
         top: 20, right: 30, left: 20, bottom: 5,
       }}
@@ -76,12 +81,13 @@ class Chart extends PureComponent {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey="pv" stackId="a" fill="#8884d8" />
-      <Bar dataKey="uv" stackId="a" fill="#82ca9d" />
+      <Bar dataKey="Baixa" stackId="a" fill="#e3e332" />
+      <Bar dataKey="Media" stackId="a" fill="#e38017" />
+      <Bar dataKey="Alta" stackId="a" fill="#e31717" />
     </BarChart>
-    </>*/
+    </>) :
+    <div class="loader"></div>
     );
-  }
 }
 
 export default Chart;
