@@ -14,6 +14,21 @@
     margin: 30px;
 }
 
+.recharts-wrapper, .recharts-legend-wrapper {
+  display: flex;
+  width: 100% !important;
+  padding-bottom: 15px;
+}
+
+.recharts-surface {
+  padding-bottom: 5px;
+}
+
+.relatorio-grafico {
+  display: flex;
+  width: 100%;
+}
+
 .legendas {
     display: flex;
     flex-wrap: wrap;
@@ -21,7 +36,8 @@
 }
 
 .legenda-grafico {
-    margin-left: 70px;
+    margin-left: 25px;
+    margin-right: auto;
     margin-bottom: 30px;
 }
 
