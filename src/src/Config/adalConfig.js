@@ -1,7 +1,7 @@
 import { AuthenticationContext, adalFetch, withAdalLogin } from 'react-adal';
 import axios from 'axios';
 const {REACT_APP_CLIENT_ID, POST_LOGIN_REDIRECT_URI} = window.env;
-
+ 
 export const adalConfig = {
   tenant: 'c6378a59-9025-42be-b941-103b280edffa',
   clientId: REACT_APP_CLIENT_ID,
