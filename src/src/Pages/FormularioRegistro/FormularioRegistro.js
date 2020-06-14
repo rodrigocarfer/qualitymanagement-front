@@ -81,7 +81,7 @@ class FormularioRegistro extends Component {
             { value: 1, displayValue: 'Média' },
             { value: 2, displayValue: 'Alta' },
           ]
-        }        
+        }         
       }
     }
   }
